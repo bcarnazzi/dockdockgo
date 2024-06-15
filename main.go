@@ -28,8 +28,9 @@ RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build -o /{{ .GoModuleName }}
 
 # Run the tests in the container
-FROM build-stage AS run-test-stage
 RUN go test -v ./...
+RUN go install golang.org/x/vuln/cmd/govulncheck@latest
+RUN govulncheck ./...
 
 # Deploy the application binary into a lean image
 FROM gcr.io/distroless/static-debian12 AS build-release-stage

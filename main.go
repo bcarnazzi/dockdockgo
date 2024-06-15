@@ -47,13 +47,11 @@ ENTRYPOINT ["/{{ .GoModuleName }}"]
 
 // getProperty returns a property value as a string, panic otherwise
 func getProperty(property string, scanner *bufio.Scanner) string {
-	var propertyValue string
 	propertyRe := regexp.MustCompile(`^` + property + `\s+(.+)$`)
 	for scanner.Scan() {
 		matches := propertyRe.FindStringSubmatch(scanner.Text())
 		if len(matches) == 2 {
-			propertyValue = matches[1]
-			return propertyValue
+			return matches[1]
 		}
 	}
 	panic("Missing property: " + property)

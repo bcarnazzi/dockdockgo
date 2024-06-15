@@ -1,0 +1,24 @@
+# Dockdockgo
+
+Dockdockgo is a simple multistage Dockerfile generator for distroless Go projects.
+
+## Installation
+```bash
+go install
+```
+
+## Usage
+```bash
+# generate Dockerfile
+dockdockgo
+
+# generate Dockerfile and expose 8080 port
+dockdockgo -p 8080
+
+# get help
+dockdockgo -h
+```
+
+## License
+
+[WTFPL](http://www.wtfpl.net/)

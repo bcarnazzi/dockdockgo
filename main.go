@@ -60,16 +60,16 @@ func getProperty(property string, scanner *bufio.Scanner) string {
 }
 
 func main() {
+	Port := flag.Int("p", 0, "Port to listen on")
+	DockerFileName := flag.String("o", "Dockerfile", "Dockerfile name")
+	flag.Parse()
+
 	goMod, err := os.Open("go.mod")
 	if err != nil {
 		panic(err)
 	}
 	defer goMod.Close()
 	scanner := bufio.NewScanner(goMod)
-
-	Port := flag.Int("p", 0, "Port to listen on")
-	DockerFileName := flag.String("o", "Dockerfile", "Dockerfile name")
-	flag.Parse()
 
 	GoModule := getProperty("module", scanner)
 	GoVersion := getProperty("go", scanner)

@@ -25,7 +25,7 @@ WORKDIR /app
 COPY . .
 RUN go mod download
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /{{ .GoModuleName }}
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /{{ .GoModuleName }}
 
 # Run the tests in the container
 RUN go test -v ./...

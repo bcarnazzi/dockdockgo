@@ -71,6 +71,9 @@ func main() {
 	scanner := bufio.NewScanner(goMod)
 
 	GoModule := getProperty("module", scanner)
+	modulePart := strings.Split(GoModule, "/")
+	GoModule = modulePart[len(modulePart)-1]
+
 	GoVersion := getProperty("go", scanner)
 
 	TemplateData := DockerFileTemplateData{

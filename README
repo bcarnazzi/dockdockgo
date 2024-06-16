@@ -3,11 +3,13 @@
 Dockdockgo is a simple multistage Dockerfile generator for distroless Go projects.
 
 ## Installation
+
 ```bash
-go install
+go install github.com/bcarnazzi/dockdockgo@latest
 ```
 
 ## Usage
+
 ```bash
 # generate Dockerfile
 dockdockgo

@@ -18,14 +18,14 @@ type DockerFileTemplateData struct {
 var DockerFileTemplate = `# syntax=docker/dockerfile:1
 
 # Build the application from source
-FROM golang:{{ .GoVersion }} AS build-stage
+FROM golang:{{.GoVersion}} AS build-stage
 
 WORKDIR /app
 
 COPY . .
 RUN go mod download
 
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /{{ .GoModuleName }}
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /{{.GoModuleName}}
 
 # Run the tests in the container
 RUN go test -v ./...
@@ -37,13 +37,13 @@ FROM gcr.io/distroless/static-debian12 AS build-release-stage
 
 WORKDIR /
 
-COPY --from=build-stage /{{ .GoModuleName }} /{{ .GoModuleName }}
+COPY --from=build-stage /{{.GoModuleName}} /{{.GoModuleName}}
 
-{{ if gt .Port 0 }}EXPOSE {{ .Port }}
+{{if gt .Port 0}}EXPOSE {{.Port}}
 
 {{end}}USER nonroot:nonroot
 
-ENTRYPOINT ["/{{ .GoModuleName }}"]
+ENTRYPOINT ["/{{.GoModuleName}}"]
 `
 
 // getProperty returns a property value as a string, panic otherwise

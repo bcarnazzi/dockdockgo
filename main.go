@@ -92,7 +92,7 @@ func main() {
 		panic(err)
 	}
 
-	if os.WriteFile(*DockerFileName, []byte(templateBuffer.String()), 0644) != nil {
+	if err := os.WriteFile(*DockerFileName, []byte(templateBuffer.String()), 0644); err != nil {
 		panic(err)
 	}
 }
